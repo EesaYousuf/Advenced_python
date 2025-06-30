@@ -51,6 +51,13 @@ def safe_call(func: Callable[[], T], fallback: T) -> T:
     except APIError as e:
         logger.error(f"Falling back due to error: {e}")
         return fallback
+# Usage
+def main():
+    endpoint = "https://fake-api.com/data"
+    result = safe_call(lambda: call_api_simulated(endpoint), fallback="Fallback data")
+    logger.info(f"Final result: {result}")
 
+if __name__ == "__main__":
+    main()
 
 
