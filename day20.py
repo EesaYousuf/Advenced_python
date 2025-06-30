@@ -31,7 +31,26 @@ def retry_on_failure(retries: int = 3, backoff: float = 0.5):
                     logger.error("Non-retryable error occurred", exc_info=True)
                     raise
         return wrapper
+    # Simulated API call
+@retry_on_failure(retries=4)
+def call_api_simulated(endpoint: str) -> str:
+    chance = random.random()
+    logger.info(f"Calling API at {endpoint}, chance={chance:.2f}")
+
+    if chance < 0.3:
+        raise NetworkError("Simulated network timeout")
+    elif chance < 0.5:
+        raise APIError("API responded with 500 error")
     
+    return f"Success response from {endpoint}"
+
+    # Fallback wrapper
+def safe_call(func: Callable[[], T], fallback: T) -> T:
+    try:
+        return func()
+    except APIError as e:
+        logger.error(f"Falling back due to error: {e}")
+        return fallback
 
 
 
