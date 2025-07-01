@@ -28,6 +28,8 @@ class LocationTracker:
                 self.update_map()
                 time.sleep(self.update_interval)
         threading.Thread(target=track, daemon=True).start()
+         def stop_tracking(self):
+        self.running = False
 
   
 
