@@ -42,3 +42,16 @@ def train(epochs=1000, lr=0.1):
         a1 = sigmoid(z1)
         z2 = a1 @ W2 + b2
         a2 = softmax(z2)
+         # Loss
+        loss = cross_entropy(a2, y_train)
+
+        # Backprop
+        dz2 = a2 - y_train
+        dW2 = a1.T @ dz2
+        db2 = np.sum(dz2, axis=0, keepdims=True)
+
+        da1 = dz2 @ W2.T
+        dz1 = da1 * a1 * (1 - a1)
+        dW1 = X_train.T @ dz1
+        db1 = np.sum(dz1, axis=0, keepdims=True)
+
