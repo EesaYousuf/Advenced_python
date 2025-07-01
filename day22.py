@@ -54,4 +54,18 @@ def train(epochs=1000, lr=0.1):
         dz1 = da1 * a1 * (1 - a1)
         dW1 = X_train.T @ dz1
         db1 = np.sum(dz1, axis=0, keepdims=True)
+         # Update weights
+        W2 -= lr * dW2
+        b2 -= lr * db2
+        W1 -= lr * dW1
+        b1 -= lr * db1
+
+        if epoch % 100 == 0:
+            print(f"Epoch {epoch} | Loss: {loss:.4f}")
+            # Prediction
+def predict(X):
+    a1 = sigmoid(X @ W1 + b1)
+    a2 = softmax(a1 @ W2 + b2)
+    return np.argmax(a2, axis=1)
+
 
