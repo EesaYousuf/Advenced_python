@@ -11,3 +11,5 @@ y = digits.target.reshape(-1, 1)
 # One-hot encode targets
 encoder = OneHotEncoder(sparse=False)
 y_encoded = encoder.fit_transform(y)
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.2)
