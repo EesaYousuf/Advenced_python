@@ -21,5 +21,13 @@ class LocationTracker:
             folium.Marker(latlng, tooltip="You are here").add_to(m)
             m.save(self.map_file)
             webbrowser.open('file://' + os.path.realpath(self.map_file))
+             def start_tracking(self):
+        self.running = True
+        def track():
+            while self.running:
+                self.update_map()
+                time.sleep(self.update_interval)
+        threading.Thread(target=track, daemon=True).start()
+
   
 
