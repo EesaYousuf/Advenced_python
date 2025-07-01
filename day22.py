@@ -29,3 +29,16 @@ def sigmoid(x):
 def softmax(x):
     exps = np.exp(x - np.max(x, axis=1, keepdims=True))
     return exps / np.sum(exps, axis=1, keepdims=True)
+# Loss
+def cross_entropy(pred, true):
+    return -np.sum(true * np.log(pred + 1e-9)) / pred.shape[0]
+
+# Training
+def train(epochs=1000, lr=0.1):
+    global W1, b1, W2, b2
+    for epoch in range(epochs):
+        # Forward
+        z1 = X_train @ W1 + b1
+        a1 = sigmoid(z1)
+        z2 = a1 @ W2 + b2
+        a2 = softmax(z2)
