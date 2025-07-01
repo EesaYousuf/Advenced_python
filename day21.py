@@ -11,4 +11,7 @@ class LocationTracker:
         self.update_interval = update_interval
         self.running = False
         self.map_file = "live_location.html"
+    def get_location(self):
+        g = geocoder.ip('me')
+        return g.latlng   
 
