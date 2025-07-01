@@ -22,3 +22,10 @@ W1 = np.random.randn(input_size, hidden_size)
 b1 = np.zeros((1, hidden_size))
 W2 = np.random.randn(hidden_size, output_size)
 b2 = np.zeros((1, output_size))
+# Activation functions
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x):
+    exps = np.exp(x - np.max(x, axis=1, keepdims=True))
+    return exps / np.sum(exps, axis=1, keepdims=True)
