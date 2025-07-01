@@ -13,5 +13,13 @@ class LocationTracker:
         self.map_file = "live_location.html"
     def get_location(self):
         g = geocoder.ip('me')
-        return g.latlng   
+        return g.latlng 
+        def update_map(self):
+        latlng = self.get_location()
+        if latlng:
+            m = folium.Map(location=latlng, zoom_start=15)
+            folium.Marker(latlng, tooltip="You are here").add_to(m)
+            m.save(self.map_file)
+            webbrowser.open('file://' + os.path.realpath(self.map_file))
+  
 
