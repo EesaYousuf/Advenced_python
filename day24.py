@@ -13,3 +13,8 @@ class CustomTransformerBlock(nn.Module):
         )
         self.norm1 = nn.LayerNorm(embed_dim)
         self.norm2 = nn.LayerNorm(embed_dim)
+def forward(self, x):
+        attn_out, _ = self.attn(x, x, x)
+        x = self.norm1(x + attn_out)
+        ff_out = self.ff(x)
+        return self.norm2(x + ff_out)
