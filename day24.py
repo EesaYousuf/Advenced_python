@@ -18,3 +18,7 @@ def forward(self, x):
         x = self.norm1(x + attn_out)
         ff_out = self.ff(x)
         return self.norm2(x + ff_out)
+# Example input
+x = torch.randn(10, 32, 64)  # (seq_len, batch, embedding)
+block = CustomTransformerBlock(embed_dim=64, heads=4)
+output = block(x)
