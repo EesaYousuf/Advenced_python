@@ -37,3 +37,12 @@ def generate_invoice(customer_name, items, filename="invoice.pdf"):
 
     c.save()
     print(f"✅ Invoice saved as {filename}")
+
+# Example usage
+customer = "Eesa Yousuf"
+items = [
+    ("Python Training", 2, 1500),
+    ("AI Bootcamp", 1, 2500),
+    ("Machine Learning Notes", 3, 500),
+]
+generate_invoice(customer, items, "Eesa Yousuf.pdf")
