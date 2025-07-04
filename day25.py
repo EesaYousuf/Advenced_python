@@ -33,3 +33,10 @@ def colorize_image(img_path):
     colorized = np.concatenate((L[:, :, np.newaxis], ab), axis=2)
     colorized = cv2.cvtColor(colorized, cv2.COLOR_LAB2BGR)
     colorized = np.clip(colorized, 0, 1)
+   # Display
+    cv2.imshow("Black & White", bw)
+    cv2.imshow("Colorized", (colorized * 255).astype("uint8"))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+# Example
+colorize_image("bw_photo.jpg")  
